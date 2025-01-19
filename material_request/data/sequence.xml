@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="material_request_sequence" model="ir.sequence">
+            <field name="name">Material Seq.</field>
+            <field name="code">material_seq</field>
+            <field name="prefix">MR</field>
+            <field name="padding">1</field>
+        </record>
+    </data>
+</odoo>

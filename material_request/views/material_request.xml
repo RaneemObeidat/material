@@ -1,0 +1,157 @@
+<odoo>
+    <data>
+
+
+<!--         <record id="view_material_request_form" model="ir.ui.view">-->
+<!--            <field name="name">material.request.form</field>-->
+<!--            <field name="model">material.request</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Material Request">-->
+<!--                    <header>-->
+<!--                        <button name="%(action_report_material_request)d" string="Print Report" type="action" class="btn-primary"/>-->
+<!--                    </header>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+        <!-- "tree" للصفحه يلي قبل  الform -->
+        <record id="view_material_request_rej_tree" model="ir.ui.view">
+            <field name="name">material.request.tree</field>
+            <field name="model">material.request</field>
+            <field name="arch" type="xml">
+                <tree class="header_custom" string="Material Request-list">
+                    <field name="request_date" required="1"/>
+                    <field name="department"/>
+                    <field name="vendor_id"/>
+                    <field name="operation_type"/>
+                    <field name="destination"/>
+                    <field name="source_id"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+
+                <!-- "form" للصفحه يلي بعد  tree -->
+         <record id="view_material_request_form" model="ir.ui.view">
+            <field name="name">material.request.tree</field>
+            <field name="model">material.request</field>
+            <field name="arch" type="xml">
+                <form string="Material Request">
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                        <header>
+<!--                            <button name="action" type="object" class="btn-primary" string="Action"/>-->
+                            <field name="status" widget="statusbar"/>
+                            <button name="action_confirm" string="Confirm" type="object" class="btn-primary" invisible="status not in ('draft','canceled')"/>
+                            <button name="action_check" string="Check Is Available" type="object"  class="btn-secondary" invisible="status not in ('pending')"/>
+                        </header>
+                            <h1>
+                                <field name="ref"/>
+                            </h1>
+<!--                        <h1>New</h1>-->
+                        <group col="4">
+                        <group col="2">
+                            <field name="request_date"/>
+                            <field name="department"/>
+                            <field name="vendor_id"/>
+                        </group>
+                        <group string="Inventory Info">
+                            <field name="operation_type"/>
+                            <field name="destination"/>
+                            <field name="source_id"/>
+                            <field name="active"/>
+                        </group>
+                        </group>
+                        <notebook>
+                        <page string="Material Request Lines">
+                            <field name="material_request_lines">
+                                <tree editable="bottom">
+                                    <field name="product_id" string="Product"/>
+                                    <field name="quantity" string="Quantity"/>
+                                    <field name="is_available" string="Is Available"/>
+                                    <field name="purchased" string="Purchased"/>
+                                    <field name="transferred" string="Transferred"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_material_request_rej_search" model="ir.ui.view">
+            <field name="name">material.request.search</field>
+            <field name="model">material.request</field>
+            <field name="arch" type="xml">
+                <search string="Material Request-list">
+                    <field name="department"/>
+                    <field name="operation_type"/>
+<!--                    <filter name="" string="" domain="[('','','')"/>-->
+<!--                    <filter name="" string="" domain="[('','','')"/>-->
+<!--                    <filter name="" string="" domain="[('','','')"/>-->
+<!--                    <filter name="group" string="" context="{'group_by':''}"/>-->
+
+                </search>
+            </field>
+        </record>
+
+        <record id="server_action_update_status" model="ir.actions.server">
+            <field name="name">Set Status to Canceled</field>
+            <field name="model_id" ref="model_material_request"/>
+            <field name="binding_model_id" ref="model_material_request"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.action_canceled()
+            </field>
+        </record>
+
+
+
+<!--        "action اجراء للمنيو يجب كتابته حتى يتم تفعيل المنيو"-->
+        <record id="action_material_request_menu" model="ir.actions.act_window">
+            <field name="name">Material Request Menu</field>
+            <field name="res_model">material.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_material_request_rej_tree"/>
+        </record>
+
+
+
+        <record id="action_material_request" model="ir.actions.act_window">
+            <field name="name">Material Request</field>
+            <field name="res_model">material.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_material_request_form"/>
+        </record>
+
+        <menuitem id="menu_main_material_request"
+                  name="Material Request"
+                  web_icon="material_request,static/description/icon.png"/>
+
+        <menuitem id="material_request_menu"
+                  name="Material Requests Menu"
+                  parent="menu_main_material_request"
+                  action="action_material_request_menu"/>
+
+        <menuitem id="material_request_reports"
+                  name="Material Requests Reports"
+                  parent="menu_main_material_request" />
+
+    </data>
+</odoo>
+
+<!-- 'in_progress','done',-->
+
+
+
+<!--          smart button                             -->
+<!--                        <div name="button_box" class="oe_button_box">-->
+<!--                            <button name="action_open"-->
+<!--                                    type="object"-->
+<!--                                    icon="fa-user"-->
+<!--                                    string="Open"-->
+<!--                                    invisible=""/>-->
+<!--                        </div>-->

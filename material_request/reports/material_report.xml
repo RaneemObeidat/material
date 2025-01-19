@@ -1,0 +1,90 @@
+<!--<odoo>-->
+
+
+<!--<record id="action_report_material_request" model="ir.actions.report">-->
+<!--        <field name="name">Material Request Report</field>-->
+<!--        <field name="model">material.request</field>-->
+<!--        <field name="report_name">your_module_name.report_material_request_template</field>-->
+<!--        <field name="report_type">qweb-pdf</field>-->
+<!--    </record>-->
+
+
+
+<!--      <record id="view_material_request_form" model="ir.ui.view">-->
+<!--        <field name="name">material.request.form</field>-->
+<!--        <field name="model">material.request</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Material Request">-->
+<!--                <header>-->
+<!--                    <button name="%(your_module_name.action_report_material_request)d" string="Print Report" type="action" class="btn-primary"/>-->
+<!--                </header>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <report-->
+<!--        id="action_report_material_request"-->
+<!--        model="material.request"-->
+<!--        string="Material Request Report"-->
+<!--        report_type="qweb-pdf"-->
+<!--        file="your_module_name.report_material_request_template"-->
+<!--        name="your_module_name.report_material_request_template"-->
+<!--    />-->
+
+
+
+<!--     <template id="report_material_request_template">-->
+<!--        <t t-call="web.html_container">-->
+<!--            <t t-foreach="docs" t-as="doc">-->
+<!--                <div class="page">-->
+<!--                    <h1 style="text-align: center;">Material Request Report</h1>-->
+
+<!--                    &lt;!&ndash; بيانات الطلب &ndash;&gt;-->
+<!--                    <table class="table table-bordered" style="width: 100%; margin-top: 20px;">-->
+<!--                        <tr>-->
+<!--                            <th>Request Date</th>-->
+<!--                            <td t-esc="doc.request_date"/>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>Department</th>-->
+<!--                            <td t-esc="doc.department.name"/>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>Vendor</th>-->
+<!--                            <td t-esc="doc.vendor_id.name"/>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>Status</th>-->
+<!--                            <td t-esc="doc.status"/>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+
+<!--                    &lt;!&ndash; تفاصيل خطوط المواد &ndash;&gt;-->
+<!--                    <h3 style="margin-top: 30px;">Material Request Lines:</h3>-->
+<!--                    <table class="table table-bordered" style="width: 100%;">-->
+<!--                        <thead>-->
+<!--                            <tr>-->
+<!--                                <th>Product</th>-->
+<!--                                <th>Quantity</th>-->
+<!--                                <th>Available</th>-->
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                            <tr t-foreach="doc.material_request_lines" t-as="line">-->
+<!--                                <td t-esc="line.product_id.name"/>-->
+<!--                                <td t-esc="line.quantity"/>-->
+<!--                                <td>-->
+<!--                                    <t t-if="line.is_available">Yes</t>-->
+<!--                                    <t t-else="No">No</t>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </template>-->
+
+
+
+<!--</odoo>-->
